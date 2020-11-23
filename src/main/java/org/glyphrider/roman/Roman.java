@@ -11,6 +11,7 @@ public class Roman {
     }
 
     private RomanConversionDataItem[] conversionData = {
+	new RomanConversionDataItem(40,"XL"),
 	new RomanConversionDataItem(10,"X"),
 	new RomanConversionDataItem(9,"IX"),
 	new RomanConversionDataItem(5,"V"),
@@ -21,12 +22,14 @@ public class Roman {
     public String to(int arabic) {
         String result;
         result = "";
+
 	for(RomanConversionDataItem item : conversionData) {
 	    while(arabic >= item.arabic) {
 		result += item.roman;
 		arabic -= item.arabic;
 	    }
 	}
+
         return result;
     }
 }
