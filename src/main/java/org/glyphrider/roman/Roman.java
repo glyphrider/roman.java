@@ -1,35 +1,55 @@
 package org.glyphrider.roman;
 
 public class Roman {
-    private class RomanConversionDataItem {
-	public int arabic;
-	public String roman;
-	public RomanConversionDataItem(int arabic, String roman) {
-	    this.arabic = arabic;
-	    this.roman = roman;
-	}
+
+    private Object[][] translation = new Object[][]{
+            {1000, "M"},
+            {900, "CM"},
+            {500, "D"},
+            {400, "CD"},
+            {100, "C"},
+            {90, "XC"},
+            {50, "L"},
+            {40, "XL"},
+            {10, "X"},
+            {9, "IX"},
+            {5, "V"},
+            {4, "IV"},
+            {1, "I"}
+    };
+
+
+    public int from(String roman) {
+        int result;
+        result = 0;
+
+        for (Object[] item : translation) {
+            int arabic = (int) item[0];
+            String prefix = (String) item[1];
+
+            while (roman.startsWith(prefix)) {
+                result += arabic;
+                roman = roman.substring((prefix.length()));
+            }
+        }
+
+        return result;
     }
 
-    private RomanConversionDataItem[] conversionData = {
-	new RomanConversionDataItem(40,"XL"),
-	new RomanConversionDataItem(10,"X"),
-	new RomanConversionDataItem(9,"IX"),
-	new RomanConversionDataItem(5,"V"),
-	new RomanConversionDataItem(4,"IV"),
-	new RomanConversionDataItem(1,"I")
-    };
-						     
     public String to(int arabic) {
         String result;
         result = "";
 
-	for(RomanConversionDataItem item : conversionData) {
-	    while(arabic >= item.arabic) {
-		result += item.roman;
-		arabic -= item.arabic;
-	    }
-	}
+        for (Object[] item : translation) {
+            int value = (int) item[0];
+            String roman = (String) item[1];
 
+            while (arabic >= value) {
+                result += roman;
+                arabic -= value;
+            }
+
+        }
         return result;
     }
 }
