@@ -31,6 +31,7 @@
         </dependency>
     </dependencies>
     <build>
+	<defaultGoal>test</defaultGoal>
         <finalName>maven-unit-tests</finalName>
         <plugins>
             <plugin>
